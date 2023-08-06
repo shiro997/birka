@@ -1,0 +1,131 @@
+<nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="">
+      <img src="./assets/images/birka-bills-alternate.png" id="alternative" *ngIf="mode=='dark'" />
+      <img src="./assets/images/birka-bills.png" id="original" *ngIf="mode=='light'" />
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="">Acerca de Birka</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="">Precios</a>
+        </li>
+        <!--<li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>-->
+        <li class="nav-item">
+          <a class="nav-link">FAQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="change($event)">
+            <i id="sun" class="bi bi-sun-fill red-sun" *ngIf="mode=='light'"></i>
+            <i class="bi bi-sun white-moon" *ngIf="mode=='dark'"></i>
+          </a>
+        </li>
+        <li class="nav-item" (click)="change($event)">
+          <a class="nav-link">
+            <i class="bi bi-moon-fill white-moon" *ngIf="mode=='dark'"></i>
+            <i class="bi bi-moon red-sun" *ngIf="mode=='light'"></i>
+          </a>
+        </li>
+      </ul>
+      <div class="dropdown" *ngIf="sesion!=undefined">
+        <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" style="width: 50px;"
+            alt="Avatar" />
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+      <button id="btn-nav" class="btn btn-dark" (click)="openModalLogin()" *ngIf="mode=='light'"> Login</button>
+      <button id="btn-nav" class="btn btn-light" (click)="openModalLogin()" *ngIf="mode=='dark'"> Login</button>
+    </div>
+  </div>
+</nav>
+
+
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <!--<a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <svg class="bi" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        </a>-->
+      <span class="mb-3 mb-md-0 text-body-secondary">© 2023 Yggdrasil LTD</span>
+    </div>
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+            <use xlink:href="#twitter"></use>
+          </svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+            <use xlink:href="#instagram"></use>
+          </svg></a></li>
+      <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24">
+            <use xlink:href="#facebook"></use>
+          </svg></a></li>
+    </ul>
+  </footer>
+</div>
+
+<div id="login" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="onCloseModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-signin w-100 m-auto">
+          <form [formGroup]="signInGroup">
+            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+        
+            <div class="form-floating">
+              <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="Email">
+              <label for="floatingInput">Email address</label>
+            </div>
+            <div class="form-floating" style="margin-top: 1%;">
+              <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="Password">
+              <label for="floatingPassword">Password</label>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="onCloseModal()">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary">
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
